@@ -1,5 +1,3 @@
-import Link from 'next/link'
-
 export function Hero() {
   return (
     <div className="hero bg-base-200 min-h-screen">
