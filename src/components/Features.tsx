@@ -11,32 +11,44 @@ const featureData = [
   {
     icon: SparklesIcon,
     title: 'Seamless Integration',
-    description: 'Effortlessly connect with your favorite tools and platforms.'
+    description: 'Effortlessly connect with your favorite tools and platforms.',
+    lightColor: 'text-blue-600',
+    darkColor: 'dark:text-blue-400'
   },
   {
     icon: LightBulbIcon,
     title: 'Smart Automation',
-    description: 'Reduce manual work with intelligent workflow automation.'
+    description: 'Reduce manual work with intelligent workflow automation.',
+    lightColor: 'text-yellow-600',
+    darkColor: 'dark:text-yellow-400'
   },
   {
     icon: ChartBarIcon,
     title: 'Advanced Analytics',
-    description: 'Gain deep insights with comprehensive data visualization.'
+    description: 'Gain deep insights with comprehensive data visualization.',
+    lightColor: 'text-green-600',
+    darkColor: 'dark:text-green-400'
   },
   {
     icon: ShieldCheckIcon,
     title: 'Robust Security',
-    description: 'Protect your data with enterprise-grade security measures.'
+    description: 'Protect your data with enterprise-grade security measures.',
+    lightColor: 'text-red-600',
+    darkColor: 'dark:text-red-400'
   },
   {
     icon: RocketLaunchIcon,
     title: 'Scalable Solution',
-    description: 'Grow your business without worrying about infrastructure limits.'
+    description: 'Grow your business without worrying about infrastructure limits.',
+    lightColor: 'text-purple-600',
+    darkColor: 'dark:text-purple-400'
   },
   {
     icon: CloudIcon,
     title: 'Cloud Native',
-    description: 'Fully optimized for cloud environments and microservices.'
+    description: 'Fully optimized for cloud environments and microservices.',
+    lightColor: 'text-indigo-600',
+    darkColor: 'dark:text-indigo-400'
   }
 ]
 
@@ -74,13 +86,14 @@ export function Features() {
                     >
                         <div className="card-body items-center text-center p-6">
                             <feature.icon 
-                                className="
+                                className={`
                                     h-12 
                                     w-12 
-                                    text-primary 
-                                    dark:text-primary-focus 
                                     mb-4 
-                                    stroke-2"
+                                    stroke-2 
+                                    ${feature.lightColor} 
+                                    ${feature.darkColor}
+                                `}
                             />
                             <h2 className="card-title 
                                 text-xl 
