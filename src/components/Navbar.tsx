@@ -1,15 +1,10 @@
 "use client"
-import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useTheme } from '@/context/ThemeContext'
 import { DaisyUITheme } from '@/context/ThemeContext';
 
 export function Navbar() {
   const { theme, setTheme } = useTheme()
-
-  /*useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);*/
 
   const handleThemeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setTheme(event.target.value as DaisyUITheme)
