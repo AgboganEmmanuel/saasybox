@@ -1,5 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 export function Navbar() {
   const [theme, setTheme] = useState('light');
@@ -34,12 +35,16 @@ export function Navbar() {
             <ul
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-              <li><a className="text-base-content">Dashboard</a></li>
+              <li>
+                <Link href="/dashboard" className="text-base-content">
+                  Dashboard
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
         <div className="navbar-center">
-          <a className="btn btn-ghost text-xl text-base-content">SaaSyBox</a>
+          <Link href="/" className="btn btn-ghost text-xl text-base-content">SaaSyBox</Link>
         </div>
         <div className="navbar-end">
           <select
