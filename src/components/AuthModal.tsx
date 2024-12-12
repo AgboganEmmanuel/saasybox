@@ -2,11 +2,9 @@
 
 import { signIn } from "next-auth/react"
 import { useState } from "react"
-import { useRouter } from "next/navigation"
 
 export function AuthModal() {
   const [isOpen, setIsOpen] = useState(false)
-  const router = useRouter()
 
   const openModal = () => {
     setIsOpen(true)
