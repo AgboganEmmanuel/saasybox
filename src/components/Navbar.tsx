@@ -111,9 +111,6 @@ export function Navbar() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/settings" className="text-base-content hover:bg-base-200">Settings</Link>
-                </li>
-                <li>
                   <a 
                     onClick={handleLogout} 
                     className="text-error hover:bg-error hover:text-error-content"
