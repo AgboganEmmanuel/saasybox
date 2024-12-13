@@ -3,12 +3,22 @@ import Link from 'next/link';
 import { useTheme } from '@/context/ThemeContext'
 import { DaisyUITheme } from '@/context/ThemeContext';
 import { AuthModal } from './AuthModal';
+import { useState } from 'react';
 
 export function Navbar() {
   const { theme, setTheme } = useTheme()
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
 
   const handleThemeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setTheme(event.target.value as DaisyUITheme)
+  }
+
+  const handleOpenAuthModal = () => {
+    setIsAuthModalOpen(true)
+  }
+
+  const handleCloseAuthModal = () => {
+    setIsAuthModalOpen(false)
   }
 
   return (
@@ -54,7 +64,29 @@ export function Navbar() {
             <option value="dracula">Dark</option>
             <option value="cupcake">Cupcake</option>
           </select>
-          <AuthModal />
+          <button 
+            onClick={handleOpenAuthModal} 
+            className="btn btn-ghost btn-circle"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 text-base-content"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </button>
+          <AuthModal 
+            isOpen={isAuthModalOpen} 
+            onClose={handleCloseAuthModal} 
+          />
           <button className="btn btn-ghost btn-circle">
             <div className="indicator">
               <svg
