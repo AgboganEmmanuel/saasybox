@@ -6,7 +6,6 @@ import { RecentSales } from './_components/RecentSales'
 import { Footer } from '@/components/Footer'
 import { UserLineGraph } from './_components/UserLineGraph'
 import { SalesBarChart } from './_components/SalesBarChart'
-import { FadeInSection } from '@/components/FadeInSection'
 
 export default function Dashboard() {
   return (
@@ -14,29 +13,17 @@ export default function Dashboard() {
       <Navbar />
       <main className="flex-grow pt-24 flex flex-col items-center space-y-6 px-4 sm:px-6 lg:px-60"> 
         <h1 className="text-3xl sm:text-4xl lg:text-5xl mt-6 font-bold text-base-content text-center">Dashboard</h1>
-        <FadeInSection>
-          <DashboardCards />
-        </FadeInSection>
+        <DashboardCards />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 w-full px-4 md:px-8 lg:px-12">
-        <FadeInSection>
           <RecentUsers />
-        </FadeInSection>
-        <FadeInSection>
           <RecentSales />
-        </FadeInSection>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 w-full px-4 md:px-8 lg:px-12">
-        <FadeInSection>
           <UserLineGraph />
-        </FadeInSection>
-        <FadeInSection>
           <SalesBarChart />
-        </FadeInSection>
         </div>
       </main>
-      <FadeInSection>
-        <Footer />
-      </FadeInSection>
+      <Footer />  
     </div>
   )
 }
