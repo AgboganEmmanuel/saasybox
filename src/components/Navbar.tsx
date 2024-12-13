@@ -3,11 +3,14 @@ import Link from 'next/link';
 import { useTheme } from '@/context/ThemeContext'
 import { DaisyUITheme } from '@/context/ThemeContext';
 import { AuthModal } from './AuthModal';
+import { Avatar } from './Avatar';  
 import { useState } from 'react';
+import { useSession, signOut } from 'next-auth/react';  
 
 export function Navbar() {
   const { theme, setTheme } = useTheme()
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
+  const { data: session } = useSession()  
 
   const handleThemeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setTheme(event.target.value as DaisyUITheme)
@@ -19,6 +22,10 @@ export function Navbar() {
 
   const handleCloseAuthModal = () => {
     setIsAuthModalOpen(false)
+  }
+
+  const handleLogout = () => {
+    signOut({ callbackUrl: '/' })
   }
 
   return (
@@ -56,7 +63,7 @@ export function Navbar() {
         </div>
         <div className="navbar-end">
           <select
-            className="select select-bordered text-base-content"
+            className="select select-bordered text-base-content mr-2"
             value={theme}
             onChange={handleThemeChange}
           >
@@ -64,25 +71,60 @@ export function Navbar() {
             <option value="dracula">Dark</option>
             <option value="cupcake">Cupcake</option>
           </select>
-          <button 
-            onClick={handleOpenAuthModal} 
-            className="btn btn-ghost btn-circle"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 text-base-content"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+          
+          {/* Conditionally render login button or avatar dropdown */}
+          {!session ? (
+            <button 
+              onClick={handleOpenAuthModal} 
+              className="btn btn-ghost btn-circle"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-          </button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 text-base-content"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </button>
+          ) : (
+            <div className="dropdown dropdown-end">
+              <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                <Avatar 
+                  firstName={session.user?.name?.split(' ')[0] || 'User'} 
+                  className="w-10 rounded-full" 
+                />
+              </div>
+              <ul 
+                tabIndex={0} 
+                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+              >
+                <li>
+                  <Link href="/profile" className="justify-between text-base-content hover:bg-base-200">
+                    Profile
+                    <span className="badge badge-primary badge-sm">New</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/settings" className="text-base-content hover:bg-base-200">Settings</Link>
+                </li>
+                <li>
+                  <a 
+                    onClick={handleLogout} 
+                    className="text-error hover:bg-error hover:text-error-content"
+                  >
+                    Logout
+                  </a>
+                </li>
+              </ul>
+            </div>
+          )}
+          
           <AuthModal 
             isOpen={isAuthModalOpen} 
             onClose={handleCloseAuthModal} 
